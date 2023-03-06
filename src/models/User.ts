@@ -6,8 +6,8 @@ import { Password } from '../services/password';
 const passwordService = new Password(config);
 
 export enum UserRole {
-  'role1' = 'role1',
-  'role2' = 'role2',
+  'admin' = 'admin',
+  'user' = 'user',
 }
 
 export interface IUser {
