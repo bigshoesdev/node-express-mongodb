@@ -13,11 +13,11 @@ router.get('/status', (req, res) => res.json({ status: 'UP' }));
 router.post('/auth/login', AuthController.login);
 router.post('/auth/signup', AuthController.signup);
 
-router.post('/user/me', [AuthMiddleware], UserController.me);
+router.get('/user/me', [AuthMiddleware], UserController.me);
 router.get('/user/all', [AuthMiddleware], UserController.all);
 
-router.post('/book/add', BookController.add);
-router.get('/book/all', BookController.all);
-router.get('/book/search', BookController.search);
+router.post('/book/add', [AuthMiddleware], BookController.add);
+router.get('/book/all', [AuthMiddleware], BookController.all);
+router.get('/book/search', [AuthMiddleware], BookController.search);
 
 export default router;

@@ -11,14 +11,10 @@ if (config.MONGO_URL == undefined) {
     message: 'MONGO_URL not specified in environment',
   });
   process.exit(1);
-  process.stdin.emit('SIGINT');
 } else {
   mongoConnection.connect(() => {
     app.listen(app.get('port'), (): void => {
       logger.info(`*\t🌏 Express server started at http://localhost:${app.get('port')}\t\t*`);
-      if (config.isDevelopment) {
-        logger.debug(`*\t⚙️  Swagger UI hosted at http://localhost:${app.get('port')}/__VERSION__/dev/api-docs\t*`);
-      }
     });
   });
 }

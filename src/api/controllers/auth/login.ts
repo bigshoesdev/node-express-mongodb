@@ -1,5 +1,4 @@
-import { RequestHandler, CookieOptions } from 'express';
-import moment from 'moment';
+import { RequestHandler } from 'express';
 
 import handleErrorMiddleware from '../../../middleware/handle-error';
 import User from '../../../models/User';
@@ -25,13 +24,6 @@ let login: RequestHandler = async (req: ILoginRequest, res) => {
   }
 
   const token = await JWTService.signPayload({ id: user.id });
-  const options: CookieOptions = {
-    expires: moment().add(config.ACCESS_TOKEN_LIFETIME_MIN, 'minutes').toDate(),
-    secure: req.secure,
-    httpOnly: true,
-    sameSite: 'strict',
-  };
-  res.cookie('Authorization', `Bearer ${token}`, options);
   res.send({ token, type: 'Bearer' });
 };
 

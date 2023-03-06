@@ -9,10 +9,9 @@ import { JWT } from '../services/jwt';
 const JWTService = new JWT(config);
 
 const authMiddleware: RequestHandler = async (req: IAuthenticateRequest, res, next) => {
-  const cookies = req.cookies;
   const headers = req.headers;
 
-  const bearerToken: string = cookies?.Authorization ?? headers?.authorization;
+  const bearerToken: string = headers?.authorization;
   if (bearerToken) {
     try {
       const [, token] = bearerToken.split(' ');
